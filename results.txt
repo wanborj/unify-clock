@@ -1,0 +1,269 @@
+
+
+####### Example 0 #######
+Source Program:
+x1		:: Kin, 	Tbool, 	glb
+x2		:: Kloc, 	Tz, 	smp(x1)
+x3		:: Kout, 	Tz, 	glb
+
+
+x2		=== fby (when (1) x1) ((x2) + (when (1) x1))
+x3		=== curr (x2) x1 0
+
+
+Result Program:
+x1		:: Kin, 	Tbool, 	glb
+x2		:: Kloc, 	Tz, 	glb
+x3		:: Kout, 	Tz, 	glb
+x4		:: Kloc, 	Tbool, 	glb
+x7		:: Kloc, 	Tbool, 	glb
+x10		:: Kloc, 	Tbool, 	glb
+x12		:: Kloc, 	Tz, 	glb
+x13		:: Kloc, 	Tz, 	glb
+x14		:: Kloc, 	Tz, 	glb
+x15		:: Kloc, 	Tz, 	glb
+x16		:: Kloc, 	Tz, 	glb
+x17		:: Kloc, 	Tz, 	glb
+
+
+x2		=== x15
+x3		=== x17
+x4		=== if (x10) then (x1) else (false)
+x7		=== fby (true) (if (x4) then (false) else (x7))
+x10		=== true
+x12		=== if (x4) then (1) else (fby (0) (x12))
+x13		=== if (x4) then (x2) else (fby (0) (x13))
+x14		=== if (x4) then (1) else (fby (0) (x14))
+x15		=== if (x4) then (if (x7) then (x12) else (fby (0) ((x13) + (x14)))) else (fby (0) (x15))
+x16		=== if (x4) then (x2) else (fby (0) (x16))
+x17		=== if (x4) then (x16) else (fby (0) (x17))
+
+
+
+
+####### Example 1 #######
+Source Program:
+x1		:: Kin, 	Tz, 	glb
+x2		:: Kloc, 	Tbool, 	glb
+x3		:: Kloc, 	Tbool, 	smp(x2)
+x4		:: Kloc, 	Tz, 	smp(x2)
+x5		:: Kloc, 	Tz, 	smp(x3)
+x6		:: Kloc, 	Tz, 	smp(x2)
+x7		:: Kloc, 	Tz, 	smp(x3)
+x8		:: Kout, 	Tz, 	glb
+x9		:: Kout, 	Tz, 	glb
+
+
+x2		=== fby (true) (not (x2))
+x3		=== fby (when (true) x2) (not (x3))
+x4		=== when (x1) x2
+x5		=== when (x4) x3
+x6		=== (fby (when (0) x2) (x6)) + (x4)
+x7		=== (fby (when (when (0) x2) x3) (x7)) + (x5)
+x8		=== curr (x6) x2 0
+x9		=== curr (curr (x7) x3 0) x2 0
+
+
+Result Program:
+x1		:: Kin, 	Tz, 	glb
+x2		:: Kloc, 	Tbool, 	glb
+x3		:: Kloc, 	Tbool, 	glb
+x4		:: Kloc, 	Tz, 	glb
+x5		:: Kloc, 	Tz, 	glb
+x6		:: Kloc, 	Tz, 	glb
+x7		:: Kloc, 	Tz, 	glb
+x8		:: Kout, 	Tz, 	glb
+x9		:: Kout, 	Tz, 	glb
+x11		:: Kloc, 	Tbool, 	glb
+x12		:: Kloc, 	Tbool, 	glb
+x20		:: Kloc, 	Tbool, 	glb
+x21		:: Kloc, 	Tbool, 	glb
+x28		:: Kloc, 	Tbool, 	glb
+x29		:: Kloc, 	Tbool, 	glb
+x30		:: Kloc, 	Tz, 	glb
+x31		:: Kloc, 	Tz, 	glb
+x32		:: Kloc, 	Tz, 	glb
+x33		:: Kloc, 	Tz, 	glb
+x34		:: Kloc, 	Tbool, 	glb
+x35		:: Kloc, 	Tbool, 	glb
+x36		:: Kloc, 	Tz, 	glb
+x37		:: Kloc, 	Tz, 	glb
+x38		:: Kloc, 	Tz, 	glb
+x39		:: Kloc, 	Tz, 	glb
+x40		:: Kloc, 	Tz, 	glb
+x41		:: Kloc, 	Tz, 	glb
+x42		:: Kloc, 	Tz, 	glb
+x43		:: Kloc, 	Tz, 	glb
+x44		:: Kloc, 	Tz, 	glb
+x45		:: Kloc, 	Tbool, 	glb
+x46		:: Kloc, 	Tbool, 	glb
+x47		:: Kloc, 	Tbool, 	glb
+x48		:: Kloc, 	Tz, 	glb
+x49		:: Kloc, 	Tz, 	glb
+x50		:: Kloc, 	Tz, 	glb
+x51		:: Kloc, 	Tz, 	glb
+x52		:: Kloc, 	Tz, 	glb
+
+
+x2		=== x35
+x3		=== x47
+x4		=== x33
+x5		=== x44
+x6		=== (x38) + (x39)
+x7		=== (x51) + (x52)
+x8		=== x31
+x9		=== x42
+x11		=== if (x28) then (x2) else (false)
+x12		=== if (x11) then (x3) else (false)
+x20		=== fby (true) (if (x11) then (false) else (x20))
+x21		=== fby (true) (if (x12) then (false) else (x21))
+x28		=== true
+x29		=== fby (true) (if (x28) then (false) else (x29))
+x30		=== if (x11) then (x6) else (fby (0) (x30))
+x31		=== if (x11) then (x30) else (fby (0) (x31))
+x32		=== if (x28) then (x1) else (fby (0) (x32))
+x33		=== if (x11) then (x32) else (fby (0) (x33))
+x34		=== if (x28) then (x2) else (fby (false) (x34))
+x35		=== if (x28) then (if (x29) then (true) else (fby (false) (not (x34)))) else (fby (false) (x35))
+x36		=== if (x11) then (0) else (fby (0) (x36))
+x37		=== if (x11) then (x6) else (fby (0) (x37))
+x38		=== if (x11) then (if (x20) then (x36) else (fby (0) (x37))) else (fby (0) (x38))
+x39		=== if (x11) then (x4) else (fby (0) (x39))
+x40		=== if (x12) then (x7) else (fby (0) (x40))
+x41		=== if (x12) then (x40) else (fby (0) (x41))
+x42		=== if (x11) then (x41) else (fby (0) (x42))
+x43		=== if (x11) then (x4) else (fby (0) (x43))
+x44		=== if (x12) then (x43) else (fby (0) (x44))
+x45		=== if (x11) then (true) else (fby (false) (x45))
+x46		=== if (x11) then (x3) else (fby (false) (x46))
+x47		=== if (x11) then (if (x20) then (x45) else (fby (false) (not (x46)))) else (fby (false) (x47))
+x48		=== if (x11) then (0) else (fby (0) (x48))
+x49		=== if (x12) then (x48) else (fby (0) (x49))
+x50		=== if (x12) then (x7) else (fby (0) (x50))
+x51		=== if (x12) then (if (x21) then (x49) else (fby (0) (x50))) else (fby (0) (x51))
+x52		=== if (x12) then (x5) else (fby (0) (x52))
+
+
+
+
+####### Example 2 #######
+Source Program:
+x1		:: Kin, 	Tz, 	glb
+x2		:: Kloc, 	Tbool, 	glb
+x3		:: Kloc, 	Tz, 	smp(x2)
+x4		:: Kout, 	Tz, 	glb
+
+
+x2		=== data2 (>) (x1) (0)
+x3		=== fby (when (3) x2) (fby (when (2) x2) (fby (when (1) x2) (when (0) x2)))
+x4		=== curr (x3) x2 4
+
+
+Result Program:
+x1		:: Kin, 	Tz, 	glb
+x2		:: Kloc, 	Tbool, 	glb
+x3		:: Kloc, 	Tz, 	glb
+x4		:: Kout, 	Tz, 	glb
+x6		:: Kloc, 	Tbool, 	glb
+x10		:: Kloc, 	Tbool, 	glb
+x13		:: Kloc, 	Tbool, 	glb
+x15		:: Kloc, 	Tz, 	glb
+x16		:: Kloc, 	Tz, 	glb
+x17		:: Kloc, 	Tz, 	glb
+x18		:: Kloc, 	Tz, 	glb
+x19		:: Kloc, 	Tz, 	glb
+x20		:: Kloc, 	Tz, 	glb
+x21		:: Kloc, 	Tz, 	glb
+x22		:: Kloc, 	Tz, 	glb
+x23		:: Kloc, 	Tz, 	glb
+x24		:: Kloc, 	Tz, 	glb
+
+
+x2		=== data2 (>) (x17) (0)
+x3		=== x24
+x4		=== x16
+x6		=== if (x13) then (x2) else (false)
+x10		=== fby (true) (if (x6) then (false) else (x10))
+x13		=== true
+x15		=== if (x6) then (x3) else (fby (0) (x15))
+x16		=== if (x6) then (x15) else (fby (4) (x16))
+x17		=== if (x13) then (x1) else (fby (0) (x17))
+x18		=== if (x6) then (3) else (fby (0) (x18))
+x19		=== if (x6) then (2) else (fby (0) (x19))
+x20		=== if (x6) then (1) else (fby (0) (x20))
+x21		=== if (x6) then (0) else (fby (0) (x21))
+x22		=== if (x6) then (if (x10) then (x20) else (fby (0) (x21))) else (fby (0) (x22))
+x23		=== if (x6) then (if (x10) then (x19) else (fby (0) (x22))) else (fby (0) (x23))
+x24		=== if (x6) then (if (x10) then (x18) else (fby (0) (x23))) else (fby (0) (x24))
+
+
+
+
+####### Example 3 #######
+Source Program:
+x1		:: Kin, 	Tz, 	glb
+x2		:: Kloc, 	Tbool, 	glb
+x3		:: Kloc, 	Tz, 	smp(x2)
+x4		:: Kout, 	Tz, 	glb
+x5		:: Kloc, 	Tz, 	smp(x2)
+
+
+x2		=== data2 (>) (x1) (0)
+x3		=== (x5) + ((x5) + ((x5) + ((x5) + (x5))))
+x4		=== curr (x3) x2 4
+x5		=== when (x1) x2
+
+
+Result Program:
+x1		:: Kin, 	Tz, 	glb
+x2		:: Kloc, 	Tbool, 	glb
+x3		:: Kloc, 	Tz, 	glb
+x4		:: Kout, 	Tz, 	glb
+x5		:: Kloc, 	Tz, 	glb
+x7		:: Kloc, 	Tbool, 	glb
+x16		:: Kloc, 	Tbool, 	glb
+x18		:: Kloc, 	Tz, 	glb
+x19		:: Kloc, 	Tz, 	glb
+x20		:: Kloc, 	Tz, 	glb
+x21		:: Kloc, 	Tz, 	glb
+x22		:: Kloc, 	Tz, 	glb
+x23		:: Kloc, 	Tz, 	glb
+x24		:: Kloc, 	Tz, 	glb
+x25		:: Kloc, 	Tz, 	glb
+x26		:: Kloc, 	Tz, 	glb
+x27		:: Kloc, 	Tz, 	glb
+
+
+x2		=== data2 (>) (x20) (0)
+x3		=== (x23) + ((x24) + ((x25) + ((x26) + (x27))))
+x4		=== x19
+x5		=== x22
+x7		=== if (x16) then (x2) else (false)
+x16		=== true
+x18		=== if (x7) then (x3) else (fby (0) (x18))
+x19		=== if (x7) then (x18) else (fby (4) (x19))
+x20		=== if (x16) then (x1) else (fby (0) (x20))
+x21		=== if (x16) then (x1) else (fby (0) (x21))
+x22		=== if (x7) then (x21) else (fby (0) (x22))
+x23		=== if (x7) then (x5) else (fby (0) (x23))
+x24		=== if (x7) then (x5) else (fby (0) (x24))
+x25		=== if (x7) then (x5) else (fby (0) (x25))
+x26		=== if (x7) then (x5) else (fby (0) (x26))
+x27		=== if (x7) then (x5) else (fby (0) (x27))
+
+
+
+
+####### Example 4 #######
+Source Program:
+x1		:: Kloc, 	Tz, 	glb
+x2		:: Kloc, 	Tz, 	glb
+x3		:: Kloc, 	Tz, 	glb
+
+
+x1		=== x2
+x2		=== x3
+x3		=== x1
+
+
+Ill-formed Source Program

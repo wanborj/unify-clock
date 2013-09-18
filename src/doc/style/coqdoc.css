@@ -1,0 +1,81 @@
+body {
+  color: black;
+  background: white;
+  font-family: monospace;
+}
+
+.code {
+    font-size: 9pt;
+    margin-left: 80pt;
+    line-height: 120%;
+}
+
+.doc {
+    font-size: 13pt;
+    margin: 12pt;
+    margin-left: 60pt;
+    font-family: "Times New Roman";
+}
+
+a.idref:visited {color : #416DFF; text-decoration : none; }
+a.idref:link {color : #416DFF; text-decoration : none; }
+a.idref:hover {text-decoration : none; }
+a.idref:active {text-decoration : none; }
+
+a.modref:visited {color : #416DFF; text-decoration : none; }
+a.modref:link {color : #416DFF; text-decoration : none; }
+a.modref:hover {text-decoration : none; }
+a.modref:active {text-decoration : none; }
+
+.id { display: inline; }
+.id[type="constructor"]   { color: rgb(60%,0%,0%);  }
+.id[type="var"]           { color: rgb(40%,0%,40%); }
+.id[type="variable"]      { color: rgb(40%,0%,40%); }
+.id[type="definition"]    { color: rgb(0%,40%,0%);  }
+.id[type="abbreviation"]  { color: rgb(0%,40%,0%);  }
+.id[type="lemma"]         { color: rgb(0%,40%,0%);  }
+.id[type="instance"]      { color: rgb(0%,40%,0%);  }
+.id[type="projection"]    { color: rgb(0%,40%,0%);  }
+.id[type="method"]        { color: rgb(0%,40%,0%);  }
+.id[type="inductive"]     { color: rgb(0%,0%,80%);  }
+.id[type="record"]        { color: rgb(0%,0%,80%);  }
+.id[type="class"]         { color: rgb(0%,0%,80%);  }
+.id[type="keyword"]       { color: #cf1d1d;         }
+/* .inlinecode .id { color: rgb(0%,0%,0%); } */
+
+#main span.docright {
+  position: absolute;
+  left: 60%;
+  width: 40%
+}
+
+h1.libtitle {
+  font-size: 2em;
+  text-align: center;
+  font-weight: 400;
+  font-family: "Comic Sans MS";
+  margin-bottom: 50pt;
+}
+
+h1, h2 {
+  margin: 14pt;
+  font-weight: 400;
+  font-family: "Times New Roman";
+}
+
+h1 {
+  font-size: 20pt;
+  margin-left: -10pt;
+}
+
+h2 {
+  font-size: 15pt;
+  margin-left: 10pt;
+}
+
+/*
+.doc code {
+  color: #008000;
+} */
+
+hr { margin-top: 50pt}
