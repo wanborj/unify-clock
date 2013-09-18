@@ -19,10 +19,10 @@ unpublished).
   * ClockUnify.v:         The specification of the clock-unifying transformation,
                           and the expected semantics preserving property.
 
-  * ClockUnifyProof.v:    A proof that any translation that confirms to the
+  * ClockUnifyProof.v:    A proof that any translation that conforms to the
                           specification would preserve the semantics.
 
-  * ClockUnifyImpl.v:     Gives a translation function that confirms to the
+  * ClockUnifyImpl.v:     Gives a translation function that conforms to the
                           specification.
 
   * Common.v:             Common utilities for such as [list] and finite maps.
